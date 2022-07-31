@@ -61,7 +61,7 @@ void XpcConnect::setup() {
   uv_mutex_init(&this->eventQueueMutex);
 
   this->dispatchQueue = dispatch_queue_create(this->serviceName.c_str(), 0);
-  this->xpcConnection = xpc_connection_create_mach_service(this->serviceName.c_str(), this->dispatchQueue, XPC_CONNECTION_MACH_SERVICE_PRIVILEGED);
+  this->xpcConnection = xpc_connection_create_mach_service(this->serviceName.c_str(), this->dispatchQueue, 0);
 
   xpc_connection_set_event_handler(this->xpcConnection, ^(xpc_object_t event) {
     xpc_retain(event);
